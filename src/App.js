@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import Paper from '@material-ui/core/Paper';
 
 const TodosQuery = gql`
 {
@@ -20,7 +21,16 @@ class App extends Component {
       return null;
     }
     
-  return <div>{todos.map(todo => (<div key={todo.id}>{todo.text}</div>))}</div>
+    return (
+      <div style={{ display: 'flex'}}>
+        <div style={{margin: "auto", width: 400}}>
+          <Paper elevation={1}>
+            {todos.map(todo => (<p key={todo.id}>{todo.text}</p>))}
+          </Paper>
+        </div>
+      </div>
+      
+    )
   }
 }
 
