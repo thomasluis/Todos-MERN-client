@@ -101,36 +101,38 @@ class App extends Component {
     if(loading) {
       return null;
     }
+    let todosComponent = todos.length !== 0 ? 
+      <Paper elevation={1}>
+        <List>
+          {todos.map(todo => (
+            <ListItem
+              key={todo.id}
+              role={undefined}
+              dense
+              button
+              onClick={() => this.updateTodo(todo)}
+            >
+              <Checkbox
+                checked={todo.complete}
+                tabIndex={-1}
+                disableRipple
+              />
+              <ListItemText primary={todo.text} />
+              <ListItemSecondaryAction>
+                <IconButton onClick={() => this.removeTodo(todo)}>
+                  <CloseIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+      </Paper> : null
     
     return (
       <div style={{ display: 'flex'}}>
         <div style={{margin: "auto", width: 400}}>
           <Form submit={this.createTodo} />
-          <Paper elevation={1}>
-            <List>
-              {todos.map(todo => (
-                <ListItem
-                  key={todo.id}
-                  role={undefined}
-                  dense
-                  button
-                  onClick={() => this.updateTodo(todo)}
-                >
-                  <Checkbox
-                    checked={todo.complete}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                  <ListItemText primary={todo.text} />
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={() => this.removeTodo(todo)}>
-                      <CloseIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
+          {todosComponent}
         </div>
       </div>
       
