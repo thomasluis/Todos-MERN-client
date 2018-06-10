@@ -12,7 +12,7 @@ export default class Form extends React.Component {
         });
     };
     handleKeyDown = e => {
-        if(e.key === 'Enter') {
+        if(e.key === 'Enter' && this.state.text.trim().length !== 0) {
             this.props.submit(this.state.text);
             this.setState({text:''})
         }
